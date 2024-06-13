@@ -17,6 +17,8 @@ Pokemon.init(
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
+
+    
   },
   {
     sequelize: connection,

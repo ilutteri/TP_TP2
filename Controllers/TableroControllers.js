@@ -1,9 +1,9 @@
-import { User } from "../Models/models.js";
+import { Tablero } from "../Models/models.js";
 
-class UserControllers {
-  async getAllUser(req, res) {
+class TableroControllers {
+  async getAllTablero(req, res) {
     try {
-      const result = await User.findAll({
+      const result = await Tablero.findAll({
         attributes: ["id", "name", "mail"]
       });
       res.status(200).send({ success: true, message: result });
@@ -11,26 +11,26 @@ class UserControllers {
       res.status(400).send({ success: false, message: error });
     }
   }
-  async getUserById(req, res) {
+  async getTableroById(req, res) {
     try {
       const { id } = req.params;
-       const result = await User.findOne({
-        attributes: ["id", "name", "mail"],
-         where: {
-          id,
-        },
-       });
-      
+      // const result = await Tablero.findOne({
+      //   attributes: ["id", "name", "mail"],
+      //   where: {
+      //     id,
+      //   },
+      // });
+      const result = await Tablero.findByPk(id);
       res.status(200).send({ success: true, message: result });
     } catch (error) {
       res.status(400).send({ success: false, message: error });
     }
   }
 
-  async createUser(req, res) {
+  async createTablero(req, res) {
     try {
       const { name, mail, password } = req.body;
-      const result = await User.create({
+      const result = await Tablero.create({
         name,
         mail,
         password,
@@ -43,11 +43,11 @@ class UserControllers {
       res.status(400).send({ success: false, message: error });
     }
   }
-  async updateUser(req, res) {
+  async updateTablero(req, res) {
     try {
       const { id } = req.params;
       const { name, mail, password } = req.body;
-      const result = await User.update(
+      const result = await Tablero.update(
         { name, mail, password },
         {
           where: {
@@ -63,15 +63,15 @@ class UserControllers {
     }
   }
 
-  async deleteUser(req, res) {
+  async deleteTablero(req, res) {
     try {
       const { id } = req.params;
-      const result = await User.destroy({
+      const result = await Tablero.destroy({
         where: {
           id,
         },
       });
-      console.log(`🚀 ~ UserControllers ~ updateUser ~ result:`, result);
+      console.log(`🚀 ~ TableroControllers ~ updateTablero ~ result:`, result);
       res
         .status(200)
         .send({ success: true, message: "usuario eliminado con exito" });
@@ -81,4 +81,4 @@ class UserControllers {
   }
 }
 
-export default UserControllers;
+export default TableroControllers;
