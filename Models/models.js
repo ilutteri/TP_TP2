@@ -15,10 +15,12 @@ Tablero.hasMany(Pokemon, {
   onDelete: "CASCADE",
   hooks: true,
 });
-Pokemon.belongsTo(Tablero, { foreignKey: "tableroId" });
+Pokemon.belongsTo(Tablero, { foreignKey: "tableroId",
+    hooks:true
+ });
 
 
-Tablero.addHook("beforeValidate", async (tablero, options) => {
+Pokemon.addHook("beforeValidate", async (tablero, options) => {
   const pokemonCount = await Pokemon.count({ where: { tableroId: tablero.id } });
   if (pokemonCount > 6) {
     throw new Error("Un tablero no puede tener mas de 6 Pokémon.");

@@ -1,4 +1,5 @@
-import { User } from "../Models/models.js";
+import { User, Tablero } from "../Models/models.js";
+
 
 class UserControllers {
   async getAllUser(req, res) {
@@ -29,15 +30,19 @@ class UserControllers {
 
   async createUser(req, res) {
     try {
-      const { name, mail, password } = req.body;
+      const { name, password,  mail, } = req.body;
       const result = await User.create({
         name,
-        mail,
         password,
+        mail,
       });
-      res.status(200).send({
+     
+      const resuTab = await Tablero.create({
+        userId: result.dataValues.id}
+      )
+        res.status(200).send({
         success: true,
-        message: `usuario ${result.dataValues.name} creado con exito`,
+        message: `usuario ${result.dataValues.name} creado con exito y el tablero ${resuTab.dataValues.userId} creado con exito`,
       });
     } catch (error) {
       res.status(400).send({ success: false, message: error });

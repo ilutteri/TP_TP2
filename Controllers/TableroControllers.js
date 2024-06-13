@@ -15,7 +15,7 @@ class TableroControllers {
     try {
       const { id } = req.params;
        const result = await Tablero.findOne({
-         attributes: ["id"],
+         attributes: ["id", "userId"],
          where: {
            id,
          },
@@ -40,7 +40,9 @@ class TableroControllers {
       });
     } catch (error) {
       res.status(400).send({ success: false, message: error });
+      console.log(message)
     }
+    
   }
   async updateTablero(req, res) {
     try {
