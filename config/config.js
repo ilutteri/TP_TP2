@@ -1,5 +1,5 @@
-const SERVER_PORT = process.env.SERVER_PORT || 8000;
-const DB_NAME = process.env.DB_NAME || "martes";
+const SERVER_PORT = process.env.SERVER_PORT || 8080;
+const DB_NAME = process.env.DB_NAME || "ortemon";
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_HOST = process.env.DB_HOST;
