@@ -10,4 +10,4 @@ Tablero.hasMany(Pokemon, {foreignKey:"tableroId"})
 Pokemon.belongsTo(Tablero, {foreignKey:"tableroId"})
 
 
-export {Tablero, User}
+export {Tablero, User, Pokemon}
