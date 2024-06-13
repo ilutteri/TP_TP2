@@ -4,7 +4,7 @@ class PokemonControllers {
   async getAllPokemon(req, res) {
     try {
       const result = await Pokemon.findAll({
-        attributes: ["id", "name", "mail"]
+        attributes: ["id", "nroPokemon", "apodo", "nivel", "tableroId"]
       });
       res.status(200).send({ success: true, message: result });
     } catch (error) {
@@ -15,7 +15,7 @@ class PokemonControllers {
     try {
       const { id } = req.params;
         const result = await Pokemon.findOne({
-         attributes: ["id", "nroPokemon", "apodo", "nivel"],
+         attributes: ["id", "nroPokemon", "apodo", "nivel", "tableroId"],
         where: {
           id,
          },

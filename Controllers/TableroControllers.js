@@ -4,7 +4,7 @@ class TableroControllers {
   async getAllTablero(req, res) {
     try {
       const result = await Tablero.findAll({
-        attributes: ["id", "name", "mail"]
+        attributes: ["id", "userId"]
       });
       res.status(200).send({ success: true, message: result });
     } catch (error) {
@@ -14,13 +14,13 @@ class TableroControllers {
   async getTableroById(req, res) {
     try {
       const { id } = req.params;
-      // const result = await Tablero.findOne({
-      //   attributes: ["id", "name", "mail"],
-      //   where: {
-      //     id,
-      //   },
-      // });
-      const result = await Tablero.findByPk(id);
+       const result = await Tablero.findOne({
+         attributes: ["id"],
+         where: {
+           id,
+         },
+       });
+      
       res.status(200).send({ success: true, message: result });
     } catch (error) {
       res.status(400).send({ success: false, message: error });
@@ -29,15 +29,14 @@ class TableroControllers {
 
   async createTablero(req, res) {
     try {
-      const { name, mail, password } = req.body;
+      const { userId } = req.body;
       const result = await Tablero.create({
-        name,
-        mail,
-        password,
+        userId,
+        
       });
       res.status(200).send({
         success: true,
-        message: `usuario ${result.dataValues.name} creado con exito`,
+        message: `Tablero de usuario aca ${result.dataValues.userId} creado con exito`,
       });
     } catch (error) {
       res.status(400).send({ success: false, message: error });
@@ -46,9 +45,9 @@ class TableroControllers {
   async updateTablero(req, res) {
     try {
       const { id } = req.params;
-      const { name, mail, password } = req.body;
+      const { userId } = req.body;
       const result = await Tablero.update(
-        { name, mail, password },
+        { userId },
         {
           where: {
             id,
@@ -57,7 +56,7 @@ class TableroControllers {
       );
       res
         .status(200)
-        .send({ success: true, message: "usuario modificado con exito" });
+        .send({ success: true, message: "Tablero de usuario modificado con exito" });
     } catch (error) {
       res.status(400).send({ success: false, message: error });
     }
