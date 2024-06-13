@@ -5,9 +5,10 @@
   "main": "index.js",
   "type":"module",
   "scripts": {
-    "start": "node .",
-    "dev": "node --watch . ",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --env-file .env .",
+    "dev": "node --env-file .env --watch .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"webpack"
   },
   "dependencies": {
     "express": "^4.19.2",
