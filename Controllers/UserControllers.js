@@ -42,7 +42,7 @@ class UserControllers {
         message: `usuario ${result.dataValues.name} creado con exito  creado con exito`,
       });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
   async updateUser(req, res) {
@@ -96,9 +96,10 @@ class UserControllers {
         id: data.id,
         name: data.name,
       };
+      console.log(payload)
       const token = genToken(payload);
       console.log(token)
-      res.cookie("token", token);
+      res.cookie("token", token); 
       res
         .status(200)
         .send({ success: true, message: "usuario logueado con exito" });

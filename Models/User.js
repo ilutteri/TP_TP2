@@ -8,6 +8,18 @@ class User extends Model {
     const compare = await bcrypt.compare(password, this.password);
     return compare;
   };
+
+  static async userExist(mail) {
+    try {
+      const user = await User.findOne({
+        attributes: ["id", "name", "mail"],
+        where: { mail },
+      });
+      return user !== null;
+    } catch (error) {
+      throw new Error('Error checking if user exists');
+    }
+  }
 }
 
 User.init(
@@ -23,6 +35,7 @@ User.init(
     mail: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true, // Añade esto para ayudar a garantizar la unicidad a nivel de base de datos
     },
   },
   {
@@ -31,22 +44,23 @@ User.init(
   }
 );
 
-User.beforeCreate (async (user) => {
-  const genSalt = await bcrypt.genSalt(10);
+User.beforeCreate(async (user) => {
+  const userExists = await User.userExist(user.mail);
+  if (userExists) {
+    throw new Error("El mail ingresado ya se encuentra registrado");
+  }
   
+  const genSalt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(user.password, genSalt);
   user.password = hashedPassword;
-})
+});
 
 User.afterCreate(async (user) => {
   try {
-    const resuTab = await Tablero.create({ userId: user.id });
-    console.log(resuTab);
+    await Tablero.create({ userId: user.id });
   } catch (error) {
     console.error('Error creating Tablero:', error);
   }
 });
 
 export default User;
-
-
