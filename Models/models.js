@@ -1,6 +1,7 @@
 import User from "./User.js";
 import Tablero from "./Tablero.js";
 import Pokemon from "./Pokemon.js";
+import Rol from "./Rol.js";
 
 
 User.hasOne(Tablero, {
@@ -9,6 +10,8 @@ User.hasOne(Tablero, {
 });
 Tablero.belongsTo(User, { foreignKey: "userId" });
 
+Rol.hasMany(User, {foreignKey:"rolId"})
+User.belongsTo(Rol, {foreignKey:"rolId"})
 
 Tablero.hasMany(Pokemon, {
   foreignKey: "tableroId",
@@ -27,4 +30,4 @@ Pokemon.addHook("beforeValidate", async (tablero, options) => {
   }
 });
 
-export { User, Tablero, Pokemon };
+export { User, Tablero, Pokemon, Rol };

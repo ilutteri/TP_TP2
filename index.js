@@ -17,7 +17,7 @@ app.use((req, res) => {
   res.status(404).send({ success: false, message: "not found" });
 });
 
-await connection.sync({force:true});
+await connection.sync({force:false});
 
 
 app.listen(SERVER_PORT, () => {

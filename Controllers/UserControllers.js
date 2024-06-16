@@ -1,11 +1,15 @@
 import { User } from "../Models/models.js";
 import { genToken } from "../utils/token.js";
-
+import {Rol} from "../Models/models.js"
 class UserControllers {
   async getAllUser(req, res) {
     try {
       const result = await User.findAll({
-        attributes: ["id", "name", "mail"]
+        attributes: ["id", "name", "mail"],
+        include:{
+          model: Rol,
+          attributes: ["name"]
+        }
       });
       res.status(200).send({ success: true, message: result });
     } catch (error) {
@@ -30,16 +34,17 @@ class UserControllers {
 
   async createUser(req, res) {
     try {
-      const { name, password,  mail, } = req.body;
+      const { name, password,  mail, rolId} = req.body;
       const result = await User.create({
         name,
         password,
         mail,
+        rolId
       });
      
         res.status(200).send({
         success: true,
-        message: `usuario ${result.dataValues.name} creado con exito  creado con exito`,
+        message: `El ${Rol.findOne(result.dataValues.rolId)} ${result.dataValues.name} creado con exito  creado con exito`,
       });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
