@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../connection/connection.js";
-
+import Tablero from "./Tablero.js";
 class Pokemon extends Model {}
 
 Pokemon.init(
@@ -25,5 +25,13 @@ Pokemon.init(
     modelName: "Pokemon",
   }
 );
+
+Pokemon.beforeCreate(async (pokemon) => {
+  const tablero = await Tablero.findByPk(pokemon.tableroId);
+  if (!tablero) {
+    throw new Error("El tableroId proporcionado no existe");
+  }
+});
+
 
 export default Pokemon;

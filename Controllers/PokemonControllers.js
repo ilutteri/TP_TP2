@@ -8,7 +8,7 @@ class PokemonControllers {
       });
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
   async getPokemonById(req, res) {
@@ -23,7 +23,7 @@ class PokemonControllers {
       
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
 
@@ -39,7 +39,7 @@ class PokemonControllers {
       
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
 
@@ -55,7 +55,7 @@ class PokemonControllers {
       
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
 
@@ -70,10 +70,10 @@ class PokemonControllers {
       });
       res.status(200).send({
         success: true,
-        message: `usuario ${result.dataValues.apodo} creado con exito`,
+        message: `Pokemon ${result.dataValues.apodo} creado con exito`,
       });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
   async updatePokemon(req, res) {
@@ -90,9 +90,9 @@ class PokemonControllers {
       );
       res
         .status(200)
-        .send({ success: true, message: "Pokemon modificado con exito" });
+        .send({ success: true, message: `Pokemon ${result.apodo} modificado con exito` });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
 
@@ -104,12 +104,11 @@ class PokemonControllers {
           id,
         },
       });
-      console.log(`🚀 ~ PokemonControllers ~ updatePokemon ~ result:`, result);
       res
         .status(200)
-        .send({ success: true, message: "usuario eliminado con exito" });
+        .send({ success: true, message: "pokemon eliminado con exito" });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
 }

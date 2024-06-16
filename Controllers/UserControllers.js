@@ -9,7 +9,7 @@ class UserControllers {
       });
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
   async getUserById(req, res) {
@@ -24,7 +24,7 @@ class UserControllers {
       
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
 
@@ -61,7 +61,7 @@ class UserControllers {
         .status(200)
         .send({ success: true, message: "usuario modificado con exito" });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
 
@@ -78,7 +78,7 @@ class UserControllers {
         .status(200)
         .send({ success: true, message: "usuario eliminado con exito" });
     } catch (error) {
-      res.status(400).send({ success: false, message: error });
+      res.status(400).send({ success: false, message: error.message });
     }
   }
   login = async (req, res) => {
