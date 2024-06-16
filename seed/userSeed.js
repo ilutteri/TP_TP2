@@ -9,8 +9,9 @@ export const userSeed = async ()=>
         await User.create({name: "Chayane", password: "hayqsertorero", mail: "salome@gmail.com"}),
         await User.create({name: "kuka", password: "yaDeBebeHay", mail: "unaFotoDePeron@gmail.com"}),
         await User.create({name: "Ash Ketchup", password: "puebloPaleta", mail: "ashito@gmail.com"}),
+        await User.create({name: "Papanatas", password: "chaskibum", mail: "ash@gmail.com"}),
        
-       /*  {name: "Papanatas", password: "chaskibum", mail: "ash@gmail.com"}, */
+      
       
     ])
 

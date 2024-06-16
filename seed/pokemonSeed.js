@@ -13,6 +13,7 @@ export const pokemonSeed = async ()=> ([
     await Pokemon.create({nroPokemon: 1, apodo: "bulbasaur" , nivel: 1, tableroId: 5}),
     await Pokemon.create({nroPokemon: 26, apodo: "raichu" , nivel: 1, tableroId: 5}),
     await Pokemon.create({nroPokemon: 1, apodo: "bulbasaur" , nivel: 1, tableroId: 6}),
+    await Pokemon.create({nroPokemon: 1, apodo: "bulbasaur" , nivel: 1, tableroId: 99}),
   
 ])
 
