@@ -27,7 +27,7 @@ class TableroControllers {
     }
   }
 
-  async createTablero(req, res) {
+/*   async createTablero(req, res) {
     try {
       const { userId } = req.body;
       const result = await Tablero.create({
@@ -43,8 +43,9 @@ class TableroControllers {
       console.log(message)
     }
     
-  }
-  async updateTablero(req, res) {
+  } */
+
+/*   async updateTablero(req, res) {
     try {
       const { id } = req.params;
       const { userId } = req.body;
@@ -62,9 +63,9 @@ class TableroControllers {
     } catch (error) {
       res.status(400).send({ success: false, message: error });
     }
-  }
+  } */
 
-  async deleteTablero(req, res) {
+/*   async deleteTablero(req, res) {
     try {
       const { id } = req.params;
       const result = await Tablero.destroy({
@@ -79,7 +80,7 @@ class TableroControllers {
     } catch (error) {
       res.status(400).send({ success: false, message: error });
     }
-  }
+  } */
 }
 
 export default TableroControllers;

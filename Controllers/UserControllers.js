@@ -1,5 +1,5 @@
-import { User, Tablero } from "../Models/models.js";
-
+import { User } from "../Models/models.js";
+import { genToken } from "../utils/token.js";
 
 class UserControllers {
   async getAllUser(req, res) {
@@ -37,12 +37,9 @@ class UserControllers {
         mail,
       });
      
-      const resuTab = await Tablero.create({
-        userId: result.dataValues.id}
-      )
         res.status(200).send({
         success: true,
-        message: `usuario ${result.dataValues.name} creado con exito y el tablero ${resuTab.dataValues.userId} creado con exito`,
+        message: `usuario ${result.dataValues.name} creado con exito  creado con exito`,
       });
     } catch (error) {
       res.status(400).send({ success: false, message: error });
@@ -84,6 +81,43 @@ class UserControllers {
       res.status(400).send({ success: false, message: error });
     }
   }
+  login = async (req, res) => {
+    try {
+      const { mail, password } = req.body;
+      const data = await User.findOne({
+        where: {
+          mail,
+        },
+      });
+      if (!data) throw new Error("Usuario no registrado");
+      const comparePass = await data.comparePass(password);
+      if (!comparePass) throw new Error("Contraseña incorrecta");
+      const payload = {
+        id: data.id,
+        name: data.name,
+      };
+      const token = genToken(payload);
+      console.log(token)
+      res.cookie("token", token);
+      res
+        .status(200)
+        .send({ success: true, message: "usuario logueado con exito" });
+    } catch (error) {
+      res.status(400).send({ success: false, message: error.message });
+    }
+  };
+
+  me = async (req, res) => {
+    try {
+      const { user } = req;
+      res.status(200).send({ success: true, message: user });
+    } catch (error) {
+      res.status(400).send({ success: false, message: error.message });
+    }
+  };
+
+
+
 }
 
 export default UserControllers;
