@@ -35,7 +35,7 @@ User.init(
     mail: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true, // Añade esto para ayudar a garantizar la unicidad a nivel de base de datos
+      unique: true, 
     },
   },
   {
