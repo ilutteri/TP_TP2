@@ -6,7 +6,7 @@ const pokemonRoutes = Router();
 
 pokemonRoutes.get("/", pokemonControllers.getAllPokemon);
 pokemonRoutes.post("/", pokemonControllers.createPokemon);
-pokemonRoutes.get("/:id", pokemonControllers.getPokemonById);
+//pokemonRoutes.get("/:id", pokemonControllers.getPokemonById);
 pokemonRoutes.get("/pokemon/:nroPokemon", pokemonControllers.getPokemonByNroPokemon);
 pokemonRoutes.get("/pokemon/user/userId", pokemonControllers.getPokemonByUserId);
 
