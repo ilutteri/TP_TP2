@@ -3,7 +3,10 @@ import connection from "../connection/connection.js";
 import bcrypt from "bcrypt";
 import Tablero from "./Tablero.js";
 
+
 class User extends Model {
+
+
   comparePass = async (password) => {
     const compare = await bcrypt.compare(password, this.password);
     return compare;
@@ -49,7 +52,6 @@ User.beforeCreate(async (user) => {
   if (userExists) {
     throw new Error("El mail ingresado ya se encuentra registrado");
   }
-  
   const genSalt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(user.password, genSalt);
   user.password = hashedPassword;

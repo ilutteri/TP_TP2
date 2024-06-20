@@ -1,6 +1,8 @@
 import { User } from "../Models/models.js";
 import { genToken } from "../utils/token.js";
 import {Rol} from "../Models/models.js"
+
+
 class UserControllers {
   async getAllUser(req, res) {
     try {
@@ -34,17 +36,18 @@ class UserControllers {
 
   async createUser(req, res) {
     try {
-      const { name, password,  mail, rolId} = req.body;
+      
+      const { name, password,  mail, } = req.body;
       const result = await User.create({
         name,
         password,
         mail,
-        rolId
+        rolId:3,
       });
-     
+      
         res.status(200).send({
         success: true,
-        message: `El ${Rol.findOne(result.dataValues.rolId)} ${result.dataValues.name} creado con exito  creado con exito`,
+        message: `El ${Rol.dataValues.rolId} ${result.dataValues.name} creado con exito  creado con exito`,
       });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
@@ -78,7 +81,7 @@ class UserControllers {
           id,
         },
       });
-      console.log(`🚀 ~ UserControllers ~ updateUser ~ result:`, result);
+  
       res
         .status(200)
         .send({ success: true, message: "usuario eliminado con exito" });
@@ -88,6 +91,7 @@ class UserControllers {
   }
   login = async (req, res) => {
     try {
+      console.log(req.body)
       const { mail, password } = req.body;
       const data = await User.findOne({
         where: {
@@ -101,7 +105,6 @@ class UserControllers {
         id: data.id,
         name: data.name,
       };
-      console.log(payload)
       const token = genToken(payload);
       console.log(token)
       res.cookie("token", token); 
@@ -117,7 +120,7 @@ class UserControllers {
     try {
       const { user } = req;
       
-      res.status(200).send({ success: true, message: user });
+      res.status(200).send({ success: true, return: user });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }

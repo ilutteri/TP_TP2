@@ -7,4 +7,4 @@ export const rolSeed = async () =>
     { name: "user" },
   ]);
 
-  await rolSeed()
+/*   await rolSeed() */

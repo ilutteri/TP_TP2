@@ -1,27 +1,35 @@
 import { Pokemon } from "../Models/models.js";
+import {Tablero } from "../Models/models.js"
 
 class PokemonControllers {
   async getAllPokemon(req, res) {
     try {
       const result = await Pokemon.findAll({
-        attributes: ["id", "nroPokemon", "apodo", "nivel", "tableroId"]
+        attributes: ["id", "nroPokemon", "apodo", "nivel", "tableroId",
+          "attack","defense","specialAttack","specialDefense","speed","hp","type","image","sonido"
+        ]
       });
-      res.status(200).send({ success: true, message: result });
+      
+      res.status(200).send({ success: true, return: result });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
+   
   }
-  async getPokemonById(req, res) {
+  async getPokemonByUserId(req, res) {
     try {
       const { id } = req.params;
+      const tabId = await Tablero.findOne(id)
         const result = await Pokemon.findOne({
-         attributes: ["id", "nroPokemon", "apodo", "nivel", "tableroId"],
+         attributes: ["id", "nroPokemon", "apodo", "nivel", "tableroId",
+          "attack","defense","specialAttack","specialDefense","speed","hp","type","image","sonido"
+        ],
         where: {
-          id,
+          tableroId:tabId,
          },
        });
       
-      res.status(200).send({ success: true, message: result });
+      res.status(200).send({ success: true, return: result });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -47,33 +55,46 @@ class PokemonControllers {
     try {
       const { tableroId } = req.params;
         const result = await Pokemon.findAll({
-         attributes: ["id", "nroPokemon", "apodo", "nivel"],
+         attributes: ["id", "nroPokemon", "apodo", "nivel", "tableroId",
+          "attack","defense","specialAttack","specialDefense","speed","hp","type","image","sonido"
+        ],
         where: {
           tableroId,
          },
        });
       
-      res.status(200).send({ success: true, message: result });
+      res.status(200).send({ success: true, return: result });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   }
-
+ 
   async createPokemon(req, res) {
     try {
-      const { nroPokemon, apodo, nivel, tableroId } = req.body;
+      const { nroPokemon, apodo, nivel, attack, defense, specialAttack, specialDefense, speed, hp, type, image, sonido } = req.body;
+      const userId = req.userId; // Obtener el userId del middleware
+
       const result = await Pokemon.create({
         nroPokemon,
         apodo,
         nivel,
-        tableroId
-      });
+        attack,
+        defense,
+        specialAttack,
+        specialDefense,
+        speed,
+        hp,
+        type,
+        image,
+        sonido,
+      }, { userId });
+
       res.status(200).send({
         success: true,
         message: `Pokemon ${result.dataValues.apodo} creado con exito`,
       });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(403).send({ success: false, message: error.message });
     }
   }
   async updatePokemon(req, res) {

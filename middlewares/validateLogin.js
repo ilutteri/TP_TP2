@@ -7,6 +7,7 @@ export const validateLogin = async (req, res, next) => {
     if (!token) throw new Error("token invalido");
     const { payload } = verifyToken(token);
     req.user = payload;
+    console.log(payload)
     next();
   } catch (error) {
     res.status(400).send({ success: false, message: error.message });

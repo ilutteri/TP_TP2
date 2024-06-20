@@ -15,7 +15,7 @@ export const validateRol = async (req, res, next) => {
 
     const rolesPermitidos = ["admin", "superAdmin"];
     if (!rolesPermitidos.includes(user.Rol.name)) {
-      return res.status(403).send({ success: false, message: "Acceso denegado" });
+      return res.status(403).send({ success: false, message: "Acceso denegado. No sos admin" });
     }
 
     next();
