@@ -2,7 +2,6 @@ import { Router } from "express";
 import UserControllers from "../Controllers/UserControllers.js";
 import { validateLogin } from "../middlewares/validateLogin.js";
 import { validateRol } from "../middlewares/validateRol.js";
-import attachUserId from '../middlewares/attachUserId.js'; 
 
 const userControllers = new UserControllers();
 const userRoutes = Router();
@@ -10,7 +9,6 @@ const userRoutes = Router();
 userRoutes.post("/login", userControllers.login);
 
 userRoutes.post("/", userControllers.createUser);
- userRoutes.use(attachUserId);  
 userRoutes.post("/logout", userControllers.logoutUser);
 
 userRoutes.get("/me", validateLogin, userControllers.me);
