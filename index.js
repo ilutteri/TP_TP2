@@ -10,12 +10,6 @@ import {corsOptions} from './middlewares/corsOptions.js';
 /* import {userSeed} from "./seed/userSeed.js";
 import {pokemonSeed} from "./seed/pokemonSeed.js"; */
 
-
-
-
-
-
-
 const app = express();
 app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: true }));

@@ -47,11 +47,11 @@ class UserControllers {
         name,
         password,
         mail,
-        rolId:3,
+        rolId:2,
       });
         res.status(200).send({
         success: true,
-        message: `El ${Rol.dataValues.rolId} ${result.dataValues.name} ha sido creado con exito`,
+        message: `El usuario ${result.dataValues.name} ha sido creado con exito`,
       });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
