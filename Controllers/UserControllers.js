@@ -47,7 +47,7 @@ class UserControllers {
         name,
         password,
         mail,
-        rolId:2,
+        rolId:1,
       });
         res.status(200).send({
         success: true,
@@ -110,7 +110,8 @@ class UserControllers {
       const payload = {
         usuarioId: data.id,
         nameUsuario: data.name,
-        tableroId: tableroId 
+        tableroId: tableroId,
+        rolId: data.rolId
       };
       const token = genToken(payload);
       res.cookie("token", token); 
