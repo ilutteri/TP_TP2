@@ -17,7 +17,7 @@ class PokemonControllers {
     }
   }
 
-  async getPokemonByUserId(req, res) {
+ /*  async getPokemonByUserId(req, res) {
     try {
       const { id } = req.params;
       const tabId = await Tablero.findOne(id)
@@ -34,7 +34,7 @@ class PokemonControllers {
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
-  }
+  } */
 
   async getPokemonByNroPokemon(req, res) {
     try {
@@ -72,13 +72,15 @@ class PokemonControllers {
  
   async createPokemon(req, res) {
     try {
-      const { nroPokemon, apodo, nivel, attack, defense, specialAttack, specialDefense, speed, hp, type, image, sonido } = req.body;
-      const userId = req.userId; // Obtener el userId del middleware
+      const { nroPokemon, apodo, nivel, tableroId, attack, defense,specialAttack, specialDefense, speed,hp,type,image,sonido} = req.body;
+     
+    
 
       const result = await Pokemon.create({
         nroPokemon,
         apodo,
         nivel,
+        tableroId,
         attack,
         defense,
         specialAttack,
@@ -88,7 +90,7 @@ class PokemonControllers {
         type,
         image,
         sonido,
-      }, { userId });
+    })
 
       res.status(200).send({
         success: true,

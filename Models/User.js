@@ -59,6 +59,7 @@ User.beforeCreate(async (user) => {
 
 User.afterCreate(async (user) => {
   try {
+    console.log("TU VIEJA LA TROLA")
     await Tablero.create({ userId: user.id });
   } catch (error) {
     console.error('Error creating Tablero:', error);

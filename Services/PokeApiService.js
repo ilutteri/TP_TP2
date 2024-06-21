@@ -9,7 +9,7 @@ class PokeApiService {
           return data.results;
       } catch (error) {
           console.error('Error fetching list of Pokemon:', error);
-          throw error;
+          
       }
   }
 
@@ -20,7 +20,7 @@ class PokeApiService {
           return data;
       } catch (error) {
           console.error(`Error fetching details for ${nameOrId}:`, error);
-          throw error;
+      
       }
   }
 }

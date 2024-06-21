@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../connection/connection.js";
 import Tablero from "./Tablero.js";
-import User from "./User.js";
+
 
 class Pokemon extends Model {}
 
@@ -19,7 +19,7 @@ Pokemon.init(
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
-    type: {
+     type: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -54,7 +54,7 @@ Pokemon.init(
     sonido: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
+    }, 
     tableroId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -70,17 +70,6 @@ Pokemon.init(
   }
 );
 
-Pokemon.beforeCreate(async (pokemon, options) => {
-  console.log("Options in beforeCreate:", options); // Debugging
-  const userId = options.userId;
-  if (!userId) {
-    throw new Error("No userId provided");
-  }
-  const tablero = await Tablero.findOne({ where: { userId } });
-  if (!tablero) {
-    throw new Error("No se encontró un tablero para el usuario proporcionado");
-  }
-  pokemon.tableroId = tablero.id;
-});
+
 
 export default Pokemon;

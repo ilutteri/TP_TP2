@@ -47,7 +47,7 @@ class UserControllers {
         name,
         password,
         mail,
-        rolId:1,
+        rolId:2,
       });
         res.status(200).send({
         success: true,

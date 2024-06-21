@@ -6,9 +6,8 @@ import { SERVER_PORT } from "./config/config.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import {corsOptions} from './middlewares/corsOptions.js';
-/* import {rolSeed} from "./seed/rolSeed.js"; */
-/* import {userSeed} from "./seed/userSeed.js";
-import {pokemonSeed} from "./seed/pokemonSeed.js"; */
+ import {rolSeed} from "./seed/rolSeed.js";  
+
 
 const app = express();
 app.use(cors(corsOptions))
@@ -24,9 +23,8 @@ app.use((req, res) => {
 });
 
 await connection.sync({force:false});
-/*  await rolSeed();  */
-/* await userSeed();
-await pokemonSeed() */
+ await rolSeed();   
+
 
 
 
