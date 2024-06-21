@@ -1,9 +1,13 @@
 import { User } from "../Models/models.js";
 import { genToken } from "../utils/token.js";
 import {Rol} from "../Models/models.js"
+import TableroService from "../Services/TableroService.js";
 
 
 class UserControllers {
+
+  _tableroService = new TableroService();
+
   async getAllUser(req, res) {
     try {
       const result = await User.findAll({
@@ -37,17 +41,17 @@ class UserControllers {
   async createUser(req, res) {
     try {
       
-      const { name, password,  mail, } = req.body;
+      const { name, password, mail } = req.body;
+      console.log(req.body);
       const result = await User.create({
         name,
         password,
         mail,
         rolId:3,
       });
-      
         res.status(200).send({
         success: true,
-        message: `El ${Rol.dataValues.rolId} ${result.dataValues.name} creado con exito  creado con exito`,
+        message: `El ${Rol.dataValues.rolId} ${result.dataValues.name} ha sido creado con exito`,
       });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
@@ -89,30 +93,32 @@ class UserControllers {
       res.status(400).send({ success: false, message: error.message });
     }
   }
+
+
   login = async (req, res) => {
     try {
-      console.log(req.body)
       const { mail, password } = req.body;
       const data = await User.findOne({
         where: {
           mail,
         },
       });
+      const tableroId = await this._tableroService.getTableroIdByUserId(data.id)
       if (!data) throw new Error("Usuario no registrado");
       const comparePass = await data.comparePass(password);
       if (!comparePass) throw new Error("Contraseña incorrecta");
       const payload = {
-        id: data.id,
-        name: data.name,
+        usuarioId: data.id,
+        nameUsuario: data.name,
+        tableroId: tableroId 
       };
       const token = genToken(payload);
-      console.log(token)
       res.cookie("token", token); 
       res
         .status(200)
-        .send({ success: true, message: "usuario logueado con exito" });
+        .send({ success: true, message: "usuario logueado con exito", payload });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(404).send({ success: false, message: error.message });
     }
   };
 
