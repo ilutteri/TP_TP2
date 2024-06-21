@@ -1,7 +1,8 @@
 import { Pokemon } from "../Models/models.js";
-import {Tablero } from "../Models/models.js"
+import { Tablero } from "../Models/models.js"
 
 class PokemonControllers {
+
   async getAllPokemon(req, res) {
     try {
       const result = await Pokemon.findAll({
@@ -14,8 +15,8 @@ class PokemonControllers {
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
-   
   }
+
   async getPokemonByUserId(req, res) {
     try {
       const { id } = req.params;
