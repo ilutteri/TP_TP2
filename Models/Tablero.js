@@ -5,10 +5,7 @@ class Tablero extends Model {}
 
 Tablero.init(
   {
-    /* userId: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-    }, */
+
   },
   {
     sequelize: connection,

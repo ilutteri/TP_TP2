@@ -6,7 +6,7 @@ class PokeApiControllers {
 
     async getAllPokeApi(req, res) {
         try {
-            const data = await _pokeApiService.getAll() ;
+            const data = await _pokeApiService.getAll();
             if (!data) throw new Error('No data found');
             res.status(200).send(data);
         } catch (error) {

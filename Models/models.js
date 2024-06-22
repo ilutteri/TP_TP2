@@ -10,17 +10,18 @@ User.hasOne(Tablero, {
 });
 Tablero.belongsTo(User, { foreignKey: "userId" });
 
-Rol.hasMany(User, {foreignKey:"rolId"})
-User.belongsTo(Rol, {foreignKey:"rolId"})
+Rol.hasMany(User, { foreignKey: "rolId" })
+User.belongsTo(Rol, { foreignKey: "rolId" })
 
 Tablero.hasMany(Pokemon, {
   foreignKey: "tableroId",
   onDelete: "CASCADE",
   hooks: true,
 });
-Pokemon.belongsTo(Tablero, { foreignKey: "tableroId",
-    hooks:true
- });
+Pokemon.belongsTo(Tablero, {
+  foreignKey: "tableroId",
+  hooks: true
+});
 
 
 Pokemon.addHook("beforeValidate", async (tablero) => {

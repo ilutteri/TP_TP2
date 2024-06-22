@@ -1,6 +1,6 @@
 import { User } from "../Models/models.js";
 import { genToken } from "../utils/token.js";
-import {Rol} from "../Models/models.js"
+import { Rol } from "../Models/models.js"
 import TableroService from "../Services/TableroService.js";
 
 
@@ -12,7 +12,7 @@ class UserControllers {
     try {
       const result = await User.findAll({
         attributes: ["id", "name", "mail"],
-        include:{
+        include: {
           model: Rol,
           attributes: ["name"]
         }
@@ -22,16 +22,17 @@ class UserControllers {
       res.status(400).send({ success: false, message: error.message });
     }
   }
+
   async getUserById(req, res) {
     try {
       const { id } = req.params;
-       const result = await User.findOne({
+      const result = await User.findOne({
         attributes: ["id", "name", "mail"],
-         where: {
+        where: {
           id,
         },
-       });
-      
+      });
+
       res.status(200).send({ success: true, message: result });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
@@ -40,16 +41,16 @@ class UserControllers {
 
   async createUser(req, res) {
     try {
-      
+
       const { name, password, mail } = req.body;
       console.log(req.body);
       const result = await User.create({
         name,
         password,
         mail,
-        rolId:2,
+        rolId: 2,
       });
-        res.status(200).send({
+      res.status(200).send({
         success: true,
         message: `El usuario ${result.dataValues.name} ha sido creado con exito`,
       });
@@ -57,6 +58,7 @@ class UserControllers {
       res.status(400).send({ success: false, message: error.message });
     }
   }
+
   async updateUser(req, res) {
     try {
       const { id } = req.params;
@@ -85,7 +87,7 @@ class UserControllers {
           id,
         },
       });
-  
+
       res
         .status(200)
         .send({ success: true, message: "usuario eliminado con exito" });
@@ -93,7 +95,6 @@ class UserControllers {
       res.status(400).send({ success: false, message: error.message });
     }
   }
-
 
   login = async (req, res) => {
     try {
@@ -114,7 +115,7 @@ class UserControllers {
         rolId: data.rolId
       };
       const token = genToken(payload);
-      res.cookie("token", token); 
+      res.cookie("token", token);
       res
         .status(200)
         .send({ success: true, message: "usuario logueado con exito", payload });
@@ -126,7 +127,7 @@ class UserControllers {
   me = async (req, res) => {
     try {
       const { user } = req;
-      
+
       res.status(200).send({ success: true, return: user });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
@@ -141,8 +142,6 @@ class UserControllers {
       res.status(400).send({ success: false, message: error.message });
     }
   };
-
-
 
 }
 

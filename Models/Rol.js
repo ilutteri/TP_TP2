@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../connection/connection.js";
 
-class Rol extends Model {}
+class Rol extends Model { }
 
 Rol.init(
   {

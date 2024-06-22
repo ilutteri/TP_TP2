@@ -2,8 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import connection from "../connection/connection.js";
 import Tablero from "./Tablero.js";
 
-
-class Pokemon extends Model {}
+class Pokemon extends Model { }
 
 Pokemon.init(
   {
@@ -19,7 +18,7 @@ Pokemon.init(
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
-     type: {
+    type: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -54,7 +53,7 @@ Pokemon.init(
     sonido: {
       type: DataTypes.STRING,
       allowNull: false,
-    }, 
+    },
     tableroId: {
       type: DataTypes.INTEGER,
       allowNull: false,
