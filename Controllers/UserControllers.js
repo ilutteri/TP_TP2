@@ -44,11 +44,18 @@ class UserControllers {
 
       const { name, password, mail } = req.body;
       console.log(req.body);
+
+      const rolUser = await Rol.findOne({
+        where:{
+          name: 'user'
+        }
+      })
+
       const result = await User.create({
         name,
         password,
         mail,
-        rolId: 2,
+        rolId: rolUser.id,
       });
       res.status(200).send({
         success: true,
@@ -68,7 +75,13 @@ class UserControllers {
         }
       })      
 
-      user.rolId = 1;
+      const rolAdmin = await Rol.findOne({
+        where:{
+          name: 'admin'
+        }
+      })
+
+      user.rolId = rolAdmin.id;
       user.save()
 
       res
@@ -81,10 +94,11 @@ class UserControllers {
 
   async deleteUser(req, res) {
     try {
-      const { id } = req.params;
+      console.log(req)
+      const idUser = req.params.idUser;
       const result = await User.destroy({
         where: {
-          id,
+          id: idUser,
         },
       });
 

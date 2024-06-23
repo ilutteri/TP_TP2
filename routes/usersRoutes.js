@@ -17,7 +17,8 @@ userRoutes.get("/:id", userControllers.getUserById);
 
 userRoutes.put("/admin/:id", userControllers.setAdmin);
 
-userRoutes.delete("/:id", validateRol, userControllers.deleteUser);
+userRoutes.delete("/:id/delete/:idUser", validateRol, userControllers.deleteUser);
+// userRoutes.delete("/:id", userControllers.deleteUser);
 
 userRoutes.use(validateLogin);
 userRoutes.get("/me", validateLogin, userControllers.me);
