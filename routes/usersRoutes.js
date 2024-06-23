@@ -10,18 +10,17 @@ userRoutes.post("/", userControllers.createUser);
 userRoutes.post("/login", userControllers.login);
 userRoutes.post("/logout", userControllers.logoutUser);
 
-userRoutes.use(validateLogin);
-userRoutes.get("/:id", userControllers.getUserById);
-userRoutes.get("/me", validateLogin, userControllers.me);
-userRoutes.get("/", validateRol, userControllers.getAllUser);
 
-userRoutes.put("/:id", userControllers.updateUser);
+userRoutes.get("/all/:id", validateRol, userControllers.getAllUser);
+userRoutes.get("/:id", userControllers.getUserById);
+
+
+userRoutes.put("/admin/:id", userControllers.setAdmin);
 
 userRoutes.delete("/:id", validateRol, userControllers.deleteUser);
 
-
-
-
+userRoutes.use(validateLogin);
+userRoutes.get("/me", validateLogin, userControllers.me);
 
 
 export default userRoutes;

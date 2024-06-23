@@ -17,7 +17,7 @@ class UserControllers {
           attributes: ["name"]
         }
       });
-      res.status(200).send({ success: true, message: result });
+      res.status(200).send({ success: true, return: result });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -59,21 +59,21 @@ class UserControllers {
     }
   }
 
-  async updateUser(req, res) {
+  async setAdmin(req,res){
     try {
-      const { id } = req.params;
-      const { name, mail, password } = req.body;
-      const result = await User.update(
-        { name, mail, password },
-        {
-          where: {
-            id,
-          },
+      const {id} = req.params
+      const user = await User.findOne({
+        where:{
+          id
         }
-      );
+      })      
+
+      user.rolId = 1;
+      user.save()
+
       res
-        .status(200)
-        .send({ success: true, message: "usuario modificado con exito" });
+        .status(200)        
+        .send({ success: true, message: `El usuario ha sido editado con exito` });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }

@@ -1,8 +1,8 @@
 import { User, Rol } from "../Models/models.js";
 
 export const validateRol = async (req, res, next) => {
-  try {
-    const user = await User.findByPk(req.user.id, {
+  try {    
+    const user = await User.findByPk(req.params.id, {
       include: {
         model: Rol,
         attributes: ["name"]
