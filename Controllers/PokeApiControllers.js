@@ -10,8 +10,8 @@ class PokeApiControllers {
             if (!data) throw new Error('No data found');
             res.status(200).send(data);
         } catch (error) {
-            res.status(400).send({ message: "error" });
-            console.log(error);
+            res.status(400).send({ message: "Error fetching all pokemons" });
+            console.error(error);
         }
     }
 
@@ -22,8 +22,8 @@ class PokeApiControllers {
             if (!data) throw new Error(`No data found for ${nameOrId}`);
             res.status(200).send(data);
         } catch (error) {
-            res.status(400).send({ message: `Error fetching details ` });
-            console.log(error);
+            res.status(400).send({ message: `Error fetching pokemon details` });
+            console.error(error);
         }
     }
 }

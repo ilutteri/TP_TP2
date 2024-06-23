@@ -110,7 +110,7 @@ class UserControllers {
     }
   }
 
-  login = async (req, res) => {
+  async login(req, res){
     try {
       const { mail, password } = req.body;
       const data = await User.findOne({
@@ -138,17 +138,16 @@ class UserControllers {
     }
   };
 
-  me = async (req, res) => {
+  async me(req, res){
     try {
-      const { user } = req;
-
+      const { user } = await req;
       res.status(200).send({ success: true, return: user });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   };
 
-  logoutUser = async (req, res) => {
+  async logoutUser(req, res){
     try {
       res.cookie("token", "");
       res.status(200).send({ success: true, message: "Usuario deslogueado con exito" });
