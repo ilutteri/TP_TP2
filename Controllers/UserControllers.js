@@ -3,10 +3,11 @@ import { genToken } from "../utils/token.js";
 import { Rol } from "../Models/models.js"
 import TableroService from "../Services/TableroService.js";
 
+  
+  const _tableroService = new TableroService();
 
 class UserControllers {
 
-  _tableroService = new TableroService();
 
   async getAllUser(req, res) {
     try {
@@ -118,7 +119,7 @@ class UserControllers {
           mail,
         },
       });
-      const tableroId = await this._tableroService.getTableroIdByUserId(data.id)
+      const tableroId = await _tableroService.getTableroIdByUserId(data.id)
       if (!data) throw new Error("Usuario no registrado");
       const comparePass = await data.comparePass(password);
       if (!comparePass) throw new Error("Contraseña incorrecta");
