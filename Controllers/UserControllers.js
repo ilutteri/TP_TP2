@@ -43,8 +43,7 @@ class UserControllers {
   async createUser(req, res) {
     try {
 
-      const { name, password, mail } = req.body;
-      console.log(req.body);
+      const { name, password, mail } = req.body;      
 
       const rolUser = await Rol.findOne({
         where:{
@@ -94,8 +93,7 @@ class UserControllers {
   }
 
   async deleteUser(req, res) {
-    try {
-      console.log(req)
+    try {      
       const idUser = req.params.idUser;
       const result = await User.destroy({
         where: {
