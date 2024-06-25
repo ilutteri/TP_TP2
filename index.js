@@ -6,7 +6,7 @@ import { SERVER_PORT } from "./config/config.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { corsOptions } from './middlewares/corsOptions.js';
-import { rolSeed } from "./seed/rolSeed.js";
+// import { rolSeed } from "./seed/rolSeed.js";
 
 const app = express();
 
@@ -23,7 +23,7 @@ app.use((req, res) => {
 });
 
 await connection.sync({ force: false });
-await rolSeed();
+// await rolSeed();
 
 app.listen(SERVER_PORT, () => {
   console.log(`server ok http://localhost:${SERVER_PORT}`);

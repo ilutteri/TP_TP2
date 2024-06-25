@@ -23,12 +23,4 @@ Pokemon.belongsTo(Tablero, {
   hooks: true
 });
 
-
-Pokemon.addHook("beforeValidate", async (tablero) => {
-  const pokemonCount = await Pokemon.count({ where: { tableroId: tablero.id } });
-  if (pokemonCount > 6) {
-    throw new Error("Un tablero no puede tener mas de 6 Pokémon.");
-  }
-});
-
 export { User, Tablero, Pokemon, Rol };

@@ -36,7 +36,7 @@ class UserControllers {
 
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(404).send({ success: false, message: error.message });
     }
   }
 
@@ -58,12 +58,12 @@ class UserControllers {
         mail,
         rolId: rolUser.id,
       });
-      res.status(200).send({
+      res.status(201).send({
         success: true,
         message: `El usuario ${result.dataValues.name} ha sido creado con exito`,
       });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(403).send({ success: false, message: error.message });
     }
   }
 
@@ -89,7 +89,7 @@ class UserControllers {
         .status(200)        
         .send({ success: true, message: `El usuario ha sido editado con exito` });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(404).send({ success: false, message: error.message });
     }
   }
 
@@ -107,7 +107,7 @@ class UserControllers {
         .status(200)
         .send({ success: true, message: "usuario eliminado con exito" });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(404).send({ success: false, message: error.message });
     }
   }
 

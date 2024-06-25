@@ -7,7 +7,7 @@ import Tablero from "./Tablero.js";
 class User extends Model {
 
 
-  comparePass = async (password) => {
+  async comparePass(password) {
     const compare = await bcrypt.compare(password, this.password);
     return compare;
   };

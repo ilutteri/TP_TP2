@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --env-file .env .",
+    "start": "npm run dev",
     "dev": "node --env-file .env --watch .",
     "userSeed": "node --env-file .env seed/userSeed.js",
     "pokeSeed": "node --env-file .env seed/pokemonSeed.js",

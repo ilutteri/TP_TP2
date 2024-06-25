@@ -25,7 +25,7 @@ class TableroControllers {
 
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(404).send({ success: false, message: error.message });
     }
   }
 

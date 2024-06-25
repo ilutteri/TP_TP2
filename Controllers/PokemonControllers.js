@@ -28,7 +28,7 @@ class PokemonControllers {
 
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(404).send({ success: false, message: error.message });
     }
   }
 
@@ -46,7 +46,7 @@ class PokemonControllers {
 
       res.status(200).send({ success: true, return: result });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(404).send({ success: false, message: error.message });
     }
   }
 
@@ -69,7 +69,7 @@ class PokemonControllers {
         image,
         sonido,
       })
-      res.status(200).send({
+      res.status(201).send({
         success: true,
         message: `Pokemon ${result.dataValues.apodo} creado con exito`,
       });
@@ -91,10 +91,10 @@ class PokemonControllers {
         }
       );
       res
-        .status(200)
+        .status(202)
         .send({ success: true, message: `Pokemon ${result.apodo} modificado con exito` });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(404).send({ success: false, message: error.message });
     }
   }
 
@@ -110,7 +110,7 @@ class PokemonControllers {
         .status(200)
         .send({ success: true, message: "pokemon eliminado con exito" });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      res.status(404).send({ success: false, message: error.message });
     }
   }
 }
